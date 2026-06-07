@@ -1,3 +1,26 @@
 <h2>Pantalla de Empleados</h2>
-<p>Aquí irá la información de los empleados.</p>
+<p>Total de empleados: {{ empleados.length }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Puesto</th>
+      <th>Salario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- @for recorre el arreglo del .ts y crea una fila por cada empleado -->
+    @for (empleado of empleados; track empleado.id) {
+      <tr>
+        <td>{{ empleado.id }}</td>
+        <td>{{ empleado.nombre }}</td>
+        <td>{{ empleado.puesto }}</td>
+        <td>{{ empleado.salario }} €</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
 <a routerLink="/dashboard">Volver al dashboard</a>

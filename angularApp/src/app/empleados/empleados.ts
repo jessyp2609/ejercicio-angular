@@ -6,4 +6,11 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './empleados.html'
 })
-export class Empleados {}
+export class Empleados {
+  // Estos datos viven en el .ts y se muestran en el .html (databinding)
+  empleados = [
+    { id: 1, nombre: 'Carlos Díaz', puesto: 'Vendedor', salario: 1500 },
+    { id: 2, nombre: 'Laura Pérez', puesto: 'Contadora', salario: 2000 },
+    { id: 3, nombre: 'Jorge Mena', puesto: 'Gerente', salario: 3000 }
+  ];
+}

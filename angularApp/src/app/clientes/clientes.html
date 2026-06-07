@@ -1,3 +1,26 @@
 <h2>Pantalla de Clientes</h2>
-<p>Aquí irá la información de los clientes.</p>
+<p>Total de clientes: {{ clientes.length }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- @for recorre el arreglo del .ts y crea una fila por cada cliente -->
+    @for (cliente of clientes; track cliente.id) {
+      <tr>
+        <td>{{ cliente.id }}</td>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.correo }}</td>
+        <td>{{ cliente.ciudad }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
 <a routerLink="/dashboard">Volver al dashboard</a>
