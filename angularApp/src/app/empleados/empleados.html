@@ -1,6 +1,9 @@
 <h2>Pantalla de Empleados</h2>
 <p>Total de empleados: {{ empleados.length }}</p>
 
+<!-- Botón con event binding (click): llama un método del .ts -->
+<button (click)="ordenarPorSalario()">Ordenar por salario</button>
+
 <table>
   <thead>
     <tr>
@@ -8,19 +11,35 @@
       <th>Nombre</th>
       <th>Puesto</th>
       <th>Salario</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
     <!-- @for recorre el arreglo del .ts y crea una fila por cada empleado -->
     @for (empleado of empleados; track empleado.id) {
-      <tr>
+      <!-- class binding: marca la fila si es el empleado seleccionado -->
+      <tr [class.fila-activa]="empleado === seleccionado">
         <td>{{ empleado.id }}</td>
         <td>{{ empleado.nombre }}</td>
         <td>{{ empleado.puesto }}</td>
-        <td>{{ empleado.salario }} €</td>
+        <td>{{ empleado.salario }}</td>
+        <td>
+          <!-- El botón le pasa al .ts el empleado de esta fila -->
+          <button (click)="verDetalle(empleado)">Ver</button>
+        </td>
       </tr>
     }
   </tbody>
 </table>
 
-<a routerLink="/dashboard">Volver al dashboard</a>
+<!-- @if: el detalle solo aparece cuando hay un empleado seleccionado -->
+@if (seleccionado) {
+  <div class="detalle">
+    <h3>Detalle del empleado</h3>
+    <p>Nombre: {{ seleccionado.nombre }}</p>
+    <p>Puesto: {{ seleccionado.puesto }}</p>
+    <p>Salario: {{ seleccionado.salario }}</p>
+  </div>
+}
+
+<p><a routerLink="/dashboard">Volver al dashboard</a></p>

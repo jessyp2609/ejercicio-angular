@@ -13,4 +13,19 @@ export class Clientes {
     { id: 2, nombre: 'Luis Gómez', correo: 'luis@correo.com', ciudad: 'Sevilla' },
     { id: 3, nombre: 'María Ruiz', correo: 'maria@correo.com', ciudad: 'Valencia' }
   ];
+
+  // Guarda el cliente seleccionado; empieza vacío (null)
+  seleccionado: any = null;
+
+  // Acción del botón "Ver": guarda el cliente en el que se hizo clic
+  verDetalle(cliente: any) {
+    this.seleccionado = cliente;
+  }
+
+  // Acción del botón "Ordenar": reordena la lista por nombre (A-Z)
+  ordenarPorNombre() {
+    this.clientes = [...this.clientes].sort((a, b) =>
+      a.nombre.localeCompare(b.nombre)
+    );
+  }
 }

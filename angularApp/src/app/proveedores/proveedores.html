@@ -1,6 +1,9 @@
 <h2>Pantalla de Proveedores</h2>
 <p>Total de proveedores: {{ proveedores.length }}</p>
 
+<!-- Botón con event binding (click): llama un método del .ts -->
+<button (click)="ordenarPorEmpresa()">Ordenar por empresa</button>
+
 <table>
   <thead>
     <tr>
@@ -8,19 +11,35 @@
       <th>Empresa</th>
       <th>Producto</th>
       <th>Teléfono</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
     <!-- @for recorre el arreglo del .ts y crea una fila por cada proveedor -->
     @for (proveedor of proveedores; track proveedor.id) {
-      <tr>
+      <!-- class binding: marca la fila si es el proveedor seleccionado -->
+      <tr [class.fila-activa]="proveedor === seleccionado">
         <td>{{ proveedor.id }}</td>
         <td>{{ proveedor.empresa }}</td>
         <td>{{ proveedor.producto }}</td>
         <td>{{ proveedor.telefono }}</td>
+        <td>
+          <!-- El botón le pasa al .ts el proveedor de esta fila -->
+          <button (click)="verDetalle(proveedor)">Ver</button>
+        </td>
       </tr>
     }
   </tbody>
 </table>
 
-<a routerLink="/dashboard">Volver al dashboard</a>
+<!-- @if: el detalle solo aparece cuando hay un proveedor seleccionado -->
+@if (seleccionado) {
+  <div class="detalle">
+    <h3>Detalle del proveedor</h3>
+    <p>Empresa: {{ seleccionado.empresa }}</p>
+    <p>Producto: {{ seleccionado.producto }}</p>
+    <p>Teléfono: {{ seleccionado.telefono }}</p>
+  </div>
+}
+
+<p><a routerLink="/dashboard">Volver al dashboard</a></p>

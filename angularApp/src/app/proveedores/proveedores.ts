@@ -13,4 +13,19 @@ export class Proveedores {
     { id: 2, empresa: 'TecnoImport', producto: 'Electrónica', telefono: '600333444' },
     { id: 3, empresa: 'Alimentos del Sur', producto: 'Comida', telefono: '600555666' }
   ];
+
+  // Guarda el proveedor seleccionado; empieza vacío (null)
+  seleccionado: any = null;
+
+  // Acción del botón "Ver": guarda el proveedor en el que se hizo clic
+  verDetalle(proveedor: any) {
+    this.seleccionado = proveedor;
+  }
+
+  // Acción del botón "Ordenar": reordena la lista por empresa (A-Z)
+  ordenarPorEmpresa() {
+    this.proveedores = [...this.proveedores].sort((a, b) =>
+      a.empresa.localeCompare(b.empresa)
+    );
+  }
 }

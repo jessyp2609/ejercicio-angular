@@ -1,6 +1,9 @@
 <h2>Pantalla de Clientes</h2>
 <p>Total de clientes: {{ clientes.length }}</p>
 
+<!-- Botón con event binding (click): llama un método del .ts -->
+<button (click)="ordenarPorNombre()">Ordenar por nombre</button>
+
 <table>
   <thead>
     <tr>
@@ -8,19 +11,35 @@
       <th>Nombre</th>
       <th>Correo</th>
       <th>Ciudad</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
     <!-- @for recorre el arreglo del .ts y crea una fila por cada cliente -->
     @for (cliente of clientes; track cliente.id) {
-      <tr>
+      <!-- class binding: marca la fila si es el cliente seleccionado -->
+      <tr [class.fila-activa]="cliente === seleccionado">
         <td>{{ cliente.id }}</td>
         <td>{{ cliente.nombre }}</td>
         <td>{{ cliente.correo }}</td>
         <td>{{ cliente.ciudad }}</td>
+        <td>
+          <!-- El botón le pasa al .ts el cliente de esta fila -->
+          <button (click)="verDetalle(cliente)">Ver</button>
+        </td>
       </tr>
     }
   </tbody>
 </table>
 
-<a routerLink="/dashboard">Volver al dashboard</a>
+<!-- @if: el detalle solo aparece cuando hay un cliente seleccionado -->
+@if (seleccionado) {
+  <div class="detalle">
+    <h3>Detalle del cliente</h3>
+    <p>Nombre: {{ seleccionado.nombre }}</p>
+    <p>Correo: {{ seleccionado.correo }}</p>
+    <p>Ciudad: {{ seleccionado.ciudad }}</p>
+  </div>
+}
+
+<p><a routerLink="/dashboard">Volver al dashboard</a></p>

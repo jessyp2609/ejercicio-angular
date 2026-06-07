@@ -13,4 +13,17 @@ export class Empleados {
     { id: 2, nombre: 'Laura Pérez', puesto: 'Contadora', salario: 2000 },
     { id: 3, nombre: 'Jorge Mena', puesto: 'Gerente', salario: 3000 }
   ];
+
+  // Guarda el empleado seleccionado; empieza vacío (null)
+  seleccionado: any = null;
+
+  // Acción del botón "Ver": guarda el empleado en el que se hizo clic
+  verDetalle(empleado: any) {
+    this.seleccionado = empleado;
+  }
+
+  // Acción del botón "Ordenar": reordena la lista por salario (mayor a menor)
+  ordenarPorSalario() {
+    this.empleados = [...this.empleados].sort((a, b) => b.salario - a.salario);
+  }
 }
