@@ -21,11 +21,4 @@ export class Clientes {
   verDetalle(cliente: any) {
     this.seleccionado = cliente;
   }
-
-  // Acción del botón "Ordenar": reordena la lista por nombre (A-Z)
-  ordenarPorNombre() {
-    this.clientes = [...this.clientes].sort((a, b) =>
-      a.nombre.localeCompare(b.nombre)
-    );
-  }
 }

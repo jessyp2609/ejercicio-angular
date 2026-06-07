@@ -21,11 +21,4 @@ export class Proveedores {
   verDetalle(proveedor: any) {
     this.seleccionado = proveedor;
   }
-
-  // Acción del botón "Ordenar": reordena la lista por empresa (A-Z)
-  ordenarPorEmpresa() {
-    this.proveedores = [...this.proveedores].sort((a, b) =>
-      a.empresa.localeCompare(b.empresa)
-    );
-  }
 }

@@ -21,9 +21,4 @@ export class Empleados {
   verDetalle(empleado: any) {
     this.seleccionado = empleado;
   }
-
-  // Acción del botón "Ordenar": reordena la lista por salario (mayor a menor)
-  ordenarPorSalario() {
-    this.empleados = [...this.empleados].sort((a, b) => b.salario - a.salario);
-  }
 }
