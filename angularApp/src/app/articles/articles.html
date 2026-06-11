@@ -1,0 +1,34 @@
+<h2>Artículos (CRUD con servicio + API)</h2>
+<p>Total de artículos: {{ articles.length }}</p>
+
+<!-- Formulario: (ngSubmit) llama al método guardar() del .ts -->
+<form (ngSubmit)="guardar()">
+  <!-- [(ngModel)] enlaza el input con form.name en ambos sentidos -->
+  <input name="name" [(ngModel)]="form.name" placeholder="Nombre del artículo" required />
+  <button type="submit">{{ editandoId ? 'Actualizar' : 'Crear' }}</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- @for recorre la lista que vino de la API -->
+    @for (article of articles; track article.id) {
+      <tr>
+        <td>{{ article.id }}</td>
+        <td>{{ article.name }}</td>
+        <td>
+          <button (click)="editar(article)">Editar</button>
+          <button (click)="eliminar(article.id!)">Borrar</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<p><a routerLink="/dashboard">Volver al dashboard</a></p>
