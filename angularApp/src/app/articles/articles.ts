@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ArticlesService, Article } from './articles.service';
@@ -12,8 +12,10 @@ export class Articles implements OnInit {
   // Inyectamos NUESTRO servicio. El componente no sabe de HTTP: solo pide datos.
   private api = inject(ArticlesService);
 
-  // Lista que se muestra en pantalla
-  articles: Article[] = [];
+  // Lista que se muestra en pantalla.
+  // Es un signal: al cambiarlo con .set() Angular repinta la vista
+  // automáticamente (la app es "zoneless", sin Zone.js).
+  articles = signal<Article[]>([]);
 
   // Modelo del formulario (se enlaza con [(ngModel)] en el HTML)
   form: Article = { name: '', description: '' };
@@ -28,7 +30,7 @@ export class Articles implements OnInit {
 
   // READ: nos suscribimos al Observable del servicio para recibir los datos
   cargar() {
-    this.api.listar().subscribe((data) => (this.articles = data));
+    this.api.listar().subscribe((data) => this.articles.set(data));
   }
 
   // CREATE o UPDATE según si estamos editando

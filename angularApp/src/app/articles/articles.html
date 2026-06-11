@@ -1,5 +1,5 @@
 <h2>Artículos (CRUD con servicio + API)</h2>
-<p>Total de artículos: {{ articles.length }}</p>
+<p>Total de artículos: {{ articles().length }}</p>
 
 <!-- Formulario: (ngSubmit) llama al método guardar() del .ts -->
 <form (ngSubmit)="guardar()">
@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <!-- @for recorre la lista que vino de la API -->
-    @for (article of articles; track article.id) {
+    @for (article of articles(); track article.id) {
       <tr>
         <td>{{ article.id }}</td>
         <td>{{ article.name }}</td>
